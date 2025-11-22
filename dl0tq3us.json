@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunarFN - Server Status</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+            animation: float1 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -200px;
+            right: -200px;
+            animation: float2 25s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.3s ease-out;
+        }
+
+        .circle1 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            top: 10%;
+            right: 15%;
+        }
+
+        .circle2 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.25) 0%, transparent 70%);
+            bottom: 20%;
+            left: 10%;
+        }
+
+        .circle3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+            top: 50%;
+            right: 35%;
+        }
+
+        .circle4 {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.2) 0%, transparent 70%);
+            top: 70%;
+            left: 40%;
+        }
+
+        .circle5 {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.18) 0%, transparent 70%);
+            bottom: 10%;
+            right: 20%;
+        }
+
+        .circle6 {
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.22) 0%, transparent 70%);
+            top: 25%;
+            left: 25%;
+        }
+
+        .circle7 {
+            width: 190px;
+            height: 190px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            top: 5%;
+            left: 50%;
+        }
+
+        .circle8 {
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.18) 0%, transparent 70%);
+            bottom: 35%;
+            right: 5%;
+        }
+
+        .circle9 {
+            width: 210px;
+            height: 210px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.16) 0%, transparent 70%);
+            top: 40%;
+            left: 5%;
+        }
+
+        .circle10 {
+            width: 170px;
+            height: 170px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.21) 0%, transparent 70%);
+            bottom: 5%;
+            left: 30%;
+        }
+
+        .circle11 {
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.19) 0%, transparent 70%);
+            top: 15%;
+            right: 40%;
+        }
+
+        .circle12 {
+            width: 195px;
+            height: 195px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.17) 0%, transparent 70%);
+            bottom: 45%;
+            right: 50%;
+        }
+
+        .circle13 {
+            width: 155px;
+            height: 155px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            top: 55%;
+            left: 60%;
+        }
+
+        .circle14 {
+            width: 175px;
+            height: 175px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.19) 0%, transparent 70%);
+            bottom: 25%;
+            right: 45%;
+        }
+
+        .circle15 {
+            width: 145px;
+            height: 145px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.18) 0%, transparent 70%);
+            top: 35%;
+            right: 60%;
+        }
+
+        .circle16 {
+            width: 165px;
+            height: 165px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.2) 0%, transparent 70%);
+            bottom: 50%;
+            left: 45%;
+        }
+
+        .circle17 {
+            width: 185px;
+            height: 185px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.17) 0%, transparent 70%);
+            top: 80%;
+            right: 10%;
+        }
+
+        .circle18 {
+            width: 135px;
+            height: 135px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.21) 0%, transparent 70%);
+            top: 45%;
+            left: 80%;
+        }
+
+        @keyframes float1 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(120px, -80px) scale(1.15);
+            }
+            50% {
+                transform: translate(-100px, 120px) scale(0.85);
+            }
+            75% {
+                transform: translate(80px, 60px) scale(1.05);
+            }
+        }
+
+        @keyframes float2 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(-140px, 100px) scale(1.25);
+            }
+            50% {
+                transform: translate(100px, -140px) scale(0.75);
+            }
+            75% {
+                transform: translate(-60px, -80px) scale(1.1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .container {
+            background: rgba(45, 45, 50, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-custom {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-custom img {
+            width: 70px;
+            height: 70px;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .server-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            background: rgba(60, 60, 65, 0.6);
+            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .server-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .server-name {
+            font-weight: 600;
+            color: #e0e0e0;
+            font-size: 1.1em;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .server-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ping {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status.online {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.online .status-dot {
+            background: #28a745;
+        }
+
+        .status.offline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.offline .status-dot {
+            background: #dc3545;
+            animation: none;
+        }
+
+        .backend-status {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .region-group {
+            margin-bottom: 25px;
+        }
+
+        .region-label {
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .server-item {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-circle circle1"></div>
+    <div class="floating-circle circle2"></div>
+    <div class="floating-circle circle3"></div>
+    <div class="floating-circle circle4"></div>
+    <div class="floating-circle circle5"></div>
+    <div class="floating-circle circle6"></div>
+    <div class="floating-circle circle7"></div>
+    <div class="floating-circle circle8"></div>
+    <div class="floating-circle circle9"></div>
+    <div class="floating-circle circle10"></div>
+    <div class="floating-circle circle11"></div>
+    <div class="floating-circle circle12"></div>
+    <div class="floating-circle circle13"></div>
+    <div class="floating-circle circle14"></div>
+    <div class="floating-circle circle15"></div>
+    <div class="floating-circle circle16"></div>
+    <div class="floating-circle circle17"></div>
+    <div class="floating-circle circle18"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo-custom">
+                <img src="https://www.playlunarfn.com/img/main/logotype.svg" alt="LunarFN Logo">
+            </div>
+            <h1>LunarFN</h1>
+            <p>Server Status Dashboard</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Game Servers</h2>
+            
+            <div class="region-group">
+                <div class="region-label">🇪🇺 Europe</div>
+                <div class="server-item">
+                    <span class="server-name">Server EU 1</span>
+                    <div class="server-info">
+                        <span class="ping">15ms</span>
+                        <div class="status online">
+                            <div class="status-dot"></div>
+                            ON
+                        </div>
+                    </div>
+                </div>
+                <div class="server-item">
+                    <span class="server-name">Server EU 2</span>
+                    <div class="server-info">
+                        <span class="ping">18ms</span>
+                        <div class="status online">
+                            <div class="status-dot"></div>
+                            ON
+                        </div>
+                    </div>
+                </div>
+                <div class="server-item">
+                    <span class="server-name">Server EU 3</span>
+                    <div class="status offline">
+                        <div class="status-dot"></div>
+                        OFF
+                    </div>
+                </div>
+            </div>
+
+            <div class="region-group">
+                <div class="region-label">🇺🇸 North America</div>
+                <div class="server-item">
+                    <span class="server-name">Server NA 1</span>
+                    <div class="status offline">
+                        <div class="status-dot"></div>
+                        OFF
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Backend Services</h2>
+            <div class="backend-status">
+                <span>✓ Fully Functional</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const circles = document.querySelectorAll('.floating-circle');
+        
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            circles.forEach((circle, index) => {
+                const rect = circle.getBoundingClientRect();
+                const circleX = rect.left + rect.width / 2;
+                const circleY = rect.top + rect.height / 2;
+                
+                const deltaX = mouseX - circleX;
+                const deltaY = mouseY - circleY;
+                
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const maxDistance = 300;
+                
+                if (distance < maxDistance) {
+                    const force = (maxDistance - distance) / maxDistance;
+                    const moveX = (deltaX / distance) * force * 50 * (index % 2 === 0 ? 1 : -1);
+                    const moveY = (deltaY / distance) * force * 50 * (index % 2 === 0 ? 1 : -1);
+                    
+                    circle.style.transform = `translate(${moveX}px, ${moveY}px) scale(${1 + force * 0.2})`;
+                } else {
+                    circle.style.transform = 'translate(0, 0) scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
